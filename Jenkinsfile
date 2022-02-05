@@ -18,7 +18,7 @@ pipeline {
                 }
             }
         }
-    }
+    
 
         stage('Make A Builder Image') {
             steps {
@@ -36,5 +36,6 @@ pipeline {
                 }
             }
         }
+    }
 }
 
