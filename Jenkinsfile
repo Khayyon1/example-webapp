@@ -60,7 +60,7 @@ pipeline {
                     productionImage.push("${env.GIT_BRANCH}")
                 }
             }
-        }
+        } 
 
         stage('Deploy to Production fixed server') {
             when {
