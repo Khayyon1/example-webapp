@@ -71,7 +71,21 @@ pipeline {
                 script {
                     productionImage.push("deploy")
                     sh """
-                        aws ec2 reboot-instances --region us-east-1 --instance-ids  i-0224c5a603b0bf727
+                        aws ec2 reboot-instances --region us-east-1 --instance-ids  i-002b90ab1feac8db2
+                    """
+                }
+            }
+        }
+
+        stage('Deploy to Production') {
+            when {
+                branch 'master'
+            }
+            steps {
+                script {
+                    PRODUCTION_ALB_LISTENER_ARN="arn:aws:elasticloadbalancing:us-east-1:991044440433:listener/app/production-website/d1426f8537d9d826/50a8c96eb793db79"
+                    sh """
+                    ./run-stack.sh deploy example-webapp-production ${PRODUCTION_ALB_LISTENER_ARN}
                     """
                 }
             }
